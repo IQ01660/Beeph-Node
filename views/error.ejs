@@ -1,0 +1,16 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('includes/head.ejs') %>
+    <title><%= pageTitle %></title>
+</head>
+<body>
+    <!-- THE ALERT -->
+    <div class="alert alert-danger" style="text-align: center" role="alert">
+        <h1 class="alert-heading">Not Found 404</h1>
+        <p>Unfortunately, the route or page you are trying to access either does not exist or is under maintainance procedures. Please try later or access a different route. Note: you could have also entered an incorrect information in some field</p>
+        <hr>
+        <p class="mb-0">If you think this is a mistake, please contact us</p>
+    </div>
+
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('includes/end.ejs') %>
+</body>

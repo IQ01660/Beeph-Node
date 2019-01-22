@@ -1,0 +1,40 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/login.css">
+    <title><%= pageTitle %></title>
+</head>
+<body>
+    <div class="card" id="login-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- NAME OF THE APP -->
+            <h5 class="card-title" style="text-align: center"><i class="fas fa-code-branch"></i> BEEPH</h5>
+            <!-- THE LOGIN FORM -->
+            <!-- route: / => POST -->
+            <form action="/" method="POST">
+                <!-- emailInput -->
+                <div class="form-group">
+                    <label for="emailInput">Email address</label>
+                    <input type="email" class="form-control" id="exampleInput" name="exampleInput" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">Only Amherst College email will be accepted</small>
+                </div>
+                <!-- passwordInput -->
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Beeph Password">
+                </div>
+                <!-- submit  button -->
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br/>
+                <br/>
+                <!-- LINK TO REGISTER PAGE -->
+                <h6 class="card-subtitle mb-2 text-muted">Do not have an account?</h6>
+                <!-- /register -->
+                <a href="/register" class="card-link">Sign Up</a>
+                <a href="/forgot-pass" class="card-link">Forgot Password</a>
+            </form>
+        </div>
+    </div>
+    
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>

@@ -1,0 +1,41 @@
+{
+  "name": "beeph",
+  "version": "1.0.0",
+  "description": "an application for giving feedback about events",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IQ01660/Beeph-Node.git"
+  },
+  "keywords": [
+    "beeph",
+    "feedback",
+    "events"
+  ],
+  "author": "Ikram Gabiyev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IQ01660/Beeph/issues"
+  },
+  "homepage": "https://github.com/IQ01660/Beeph#readme",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.12",
+    "mysql2": "^1.6.4",
+    "nodemailer": "^5.1.1",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

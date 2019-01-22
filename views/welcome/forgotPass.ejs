@@ -1,0 +1,35 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/login.css">
+    <title><%= pageTitle %></title>
+</head>
+<body>
+    <div class="card" id="login-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- NAME OF THE APP -->
+            <h5 class="card-title" style="text-align: center"><i class="fas fa-code-branch"></i> BEEPH</h5>
+            <h6 class="card-title">Enter you email: we will send you your password</h6>
+            <!-- THE LOGIN FORM -->
+            <!-- route: /email-verify => POST -->
+            <form action="/forgot-pass" method="POST">
+                <!-- emailInput -->
+                <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp" placeholder="Amherst Email">
+                </div>
+                
+                <!-- submit  button -->
+                <button type="submit" class="btn btn-primary">Enter</button>
+                <br/>
+                <br/>
+                <!-- LINK TO LOG IN PAGE -->
+                <h6 class="card-subtitle mb-2 text-muted">Already have an account?</h6>
+                <!-- /register -->
+                <a href="/" class="card-link">Log In</a>
+            </form>
+        </div>
+    </div>
+    
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>

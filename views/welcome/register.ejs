@@ -1,0 +1,51 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/login.css">
+    <title><%= pageTitle %></title>
+</head>
+<body>
+    <div class="card" id="login-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- NAME OF THE APP -->
+            <h5 class="card-title" style="text-align: center"><i class="fas fa-code-branch"></i> BEEPH</h5>
+            <!-- THE LOGIN FORM -->
+            <!-- route: /register => POST -->
+            <form action="/register" method="POST">
+                <!-- emailInput -->
+                <div class="form-group">
+                    <label for="emailInput">Email address</label>
+                    <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">Only Amherst College email will be accepted</small>
+                </div>
+                <!-- passwordInput -->
+                <div class="form-group">
+                    <label for="passwordInput">New Password</label>
+                    <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Beeph Password">
+                </div>
+                <div class="form-group">
+                    <label for="passwordInputRepeat">Repeat Password</label>
+                    <input type="password" class="form-control" id="passwordInputRepeat" name="passwordInputRepeat" placeholder="Beeph Password">
+                </div>
+                <div class="form-group">
+                    <label for="userName">Your Name</label>
+                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="userSurname">Your Surname</label>
+                    <input type="text" class="form-control" id="userSurname" name="userSurname" placeholder="Surname">
+                </div>
+                <!-- submit  button -->
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <br/>
+                <br/>
+                <!-- LINK TO LOG IN PAGE -->
+                <h6 class="card-subtitle mb-2 text-muted">Already have an account?</h6>
+                <!-- /register -->
+                <a href="/" class="card-link">Log In</a>
+            </form>
+        </div>
+    </div>
+    
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>

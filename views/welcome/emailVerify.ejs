@@ -1,0 +1,36 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/login.css">
+    <title><%= pageTitle %></title>
+</head>
+<body>
+    <div class="card" id="login-card" style="width: 18rem;">
+        <div class="card-body">
+            <!-- NAME OF THE APP -->
+            <h5 class="card-title" style="text-align: center"><i class="fas fa-code-branch"></i> BEEPH</h5>
+            <h6 class="card-title">We sent a verification code to your email</h6>
+            <!-- THE LOGIN FORM -->
+            <!-- route: /email-verify => POST -->
+            <form action="/email-verify" method="POST">
+                <!-- emailInput -->
+                <div class="form-group">
+                    <label for="verifyCode">Verification Code</label>
+                    <input type="number" class="form-control" id="verifyCode" name="verifyCode" aria-describedby="emailHelp" placeholder="Enter Code">
+                </div>
+                
+                <!-- submit  button -->
+                <button type="submit" class="btn btn-primary">Enter</button>
+                <br/>
+                <br/>
+                <!-- LINK TO LOG IN PAGE -->
+                <h6 class="card-subtitle mb-2 text-muted">Already have an account?</h6>
+                <!-- /register -->
+                <a href="/" class="card-link">Log In</a>
+                <input type="hidden" value="<%= code %>" name="code" id="code">
+            </form>
+        </div>
+    </div>
+    
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>

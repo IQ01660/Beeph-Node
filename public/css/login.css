@@ -1,0 +1,11 @@
+body {
+    margin:0;
+    padding:0;
+    background:linear-gradient(to right, rgb(162, 0, 255), rgb(0, 119, 255));
+    font-family: 'Walter Turncoat', cursive;
+}
+
+#login-card {
+    margin: 2em auto;
+    background-color: rgba(255, 255, 255, 0.8);
+}
