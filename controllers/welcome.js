@@ -6,16 +6,10 @@ const User = require('./../models/user');
 //enironment variables
 require('dotenv').config();
 
-//global user info
-let email;
-let password;
-let name;
-let surname;
-
 //setting up the email transporter
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
-        api_key:`${process.env.SECRET_API}`
+        api_key: `${process.env.SECRET_API}`
     }
 }));
 
@@ -31,7 +25,8 @@ exports.getLogin = (req, res, next) => {
 // /register => GET
 exports.getRegister = (req, res, next) => {
     res.render('welcome/register.ejs', {
-        pageTitle: "Sign Up"
+        pageTitle: "Sign Up",
+        inputError: false
     });
 }
 
@@ -39,7 +34,7 @@ exports.getRegister = (req, res, next) => {
 exports.postRegister = (req, res, next) => {
     //checking if email is amherst email 
     // or if it already was used    
-    email = req.body.emailInput;
+    const email = req.body.emailInput;
 
     let emailDoesExist = false;
     User.findByEmail(email)
@@ -50,18 +45,21 @@ exports.postRegister = (req, res, next) => {
         return result;
     })
     .then(result => {
-        if( (email.split('@')[1] != 'amherst.edu') || (emailDoesExist == true)) {
-            res.redirect('/register');
+        if((email.split('@')[1] != 'amherst.edu') || (emailDoesExist == true)) {
+            req.method = 'GET';
+            res.render('welcome/register.ejs', {
+                pageTitle: "Sign Up",
+                inputError: true
+            });
         }
         else {
             //checking if password are the same
             if(req.body.passwordInput == req.body.passwordInputRepeat) {
-                password = req.body.passwordInput;
-                name = req.body.userName;
-                surname = req.body.userSurname;
+                const password = req.body.passwordInput;
+                const name = req.body.userName;
+                const surname = req.body.userSurname;
 
                 let randomCode = Math.floor(Math.random() * 10000000000); 
-
                 return transporter.sendMail({
                     to: email,
                     from: 'beephamherst@gmail.com',
@@ -69,9 +67,14 @@ exports.postRegister = (req, res, next) => {
                     html: `Your Code Is: <h1>${randomCode}</h1>`
                 })
                 .then(result => {
+                    req.method = 'GET';
                     res.render('welcome/emailVerify.ejs', {
                         code: randomCode,
-                        pageTitle: "Verify Email"
+                        pageTitle: "Verify Email",
+                        email: email,
+                        password: password,
+                        name: name,
+                        surname: surname
                     })
                 })
                 .catch(err => {
@@ -79,7 +82,11 @@ exports.postRegister = (req, res, next) => {
                 });
             }
             else {
-                res.redirect('/register');
+                req.method = 'GET';
+                res.render('welcome/register.ejs', {
+                    pageTitle: "Sign Up",
+                    inputError: true
+                });
             }
         }
     })
@@ -89,13 +96,13 @@ exports.postRegister = (req, res, next) => {
 exports.postEmailVerify = (req, res, next) => {
     const verificationCode = req.body.code;
     const enteredCode = req.body.verifyCode;
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+    const surname = req.body.surname;
     //creating a new user
     if(enteredCode == verificationCode) {
         const registeredUser = new User(email, password, name, surname);
-        email = undefined;
-        password = undefined;
-        name = undefined;
-        surname = undefined;
         registeredUser.save()
         .then(result => {
             res.redirect('/');

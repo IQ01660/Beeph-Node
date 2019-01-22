@@ -7,10 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IQ01660/Beeph-Node.git"
-  },
   "keywords": [
     "beeph",
     "feedback",
@@ -18,10 +14,6 @@
   ],
   "author": "Ikram Gabiyev",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/IQ01660/Beeph/issues"
-  },
-  "homepage": "https://github.com/IQ01660/Beeph#readme",
   "dependencies": {
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",

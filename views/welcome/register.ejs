@@ -8,6 +8,10 @@
         <div class="card-body">
             <!-- NAME OF THE APP -->
             <h5 class="card-title" style="text-align: center"><i class="fas fa-code-branch"></i> BEEPH</h5>
+            <!-- THE INPUT ERROR -->
+            <% if(inputError == true) { %>
+                <h6 class="card-title" style="color: red">A field was entered incorrectly</h6>
+            <% } %>
             <!-- THE LOGIN FORM -->
             <!-- route: /register => POST -->
             <form action="/register" method="POST">

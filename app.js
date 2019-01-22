@@ -1,5 +1,5 @@
 //variable
-const PORT = 3666;
+const PORT = 3066;
 
 //all default imports
 const express = require('express');
