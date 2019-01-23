@@ -8,6 +8,7 @@ class User {
         this.name = name;
         this.surname = surname;
         this._id = id;
+        this.aboutMe = '';
     }
     
     save() {
@@ -21,9 +22,45 @@ class User {
         });
     }
 
+    updateAboutMe(_aboutMe) {
+        const db = getDb();
+        return db.collection('users').updateOne({email: this.email}, {$set : {aboutMe: _aboutMe}});
+    }
+
     static findByEmail(_email) {
         const db = getDb();
         return db.collection('users').findOne({email: _email});
+    }
+
+    static fetchAll() {
+        const db = getDb();
+        return db.collection('users').find().toArray()
+        .then(result => {
+            return result
+        })
+        .catch(err => {
+            console.log('CANNOT FETCH DATA');
+        });
+    }
+
+    static hasAccess(_email, _pass) {
+        let _hasAccess = false;
+        return User.fetchAll()
+        .then(users => {
+            //go through every user
+            
+            for (let i = 0; i < users.length; i++) {
+                if(users[i].email == _email && users[i].password == _pass) {
+                    _hasAccess = true;
+                    return _hasAccess;
+                }
+            }
+            //in case it failed to find the user
+            return _hasAccess;
+        })
+        .catch(err => {
+            throw err;
+        });
     }
 }
 

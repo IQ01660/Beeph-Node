@@ -1,4 +1,5 @@
 //all imports
+const express = require('express');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const User = require('./../models/user');
@@ -7,6 +8,8 @@ const User = require('./../models/user');
 require('dotenv').config();
 
 //setting up the email transporter
+//beeph - account
+//password - as always
 const transporter = nodemailer.createTransport(sendgridTransport({
     auth: {
         api_key: `${process.env.SECRET_API}`
@@ -17,8 +20,16 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
 // / => GET
 exports.getLogin = (req, res, next) => {
+    //query param
+    const inputStatus = req.query.input;
+    //if input was incorrect
+    let fieldCorrect = true;
+    if (inputStatus == 'incorrect') {
+        fieldCorrect = false;
+    }
     res.render('welcome/index.ejs', {
-        pageTitle: "Beeph | Login"
+        pageTitle: "Beeph | Login",
+        fieldCorrect: fieldCorrect
     });
 }
 

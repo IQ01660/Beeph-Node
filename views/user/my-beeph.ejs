@@ -1,0 +1,98 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/my-beeph.css">
+</head>
+<body>
+    <!-- INCLUDING THE NAVBAR -->
+    <%- include('../includes/nav.ejs', {user: user}) %>
+
+
+    <!-- MAIN PART -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">My Beeph</h1>
+        </div>
+    </div>
+    <!-- THE OPTIONS -->
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group profileOptions" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Main Info</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">About Me</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">Name</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=user.name%></button>
+                        <button type="button" class="list-group-item list-group-item-action active">Surname</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=user.surname%></button>
+                        <button type="button" class="list-group-item list-group-item-action active" disabled>Email</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=user.email%></button>
+                    </div>
+                </div>
+
+
+
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">About Me</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=user.aboutMe%>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary clickable" data-toggle="modal" data-target="#exampleModalCenter">
+                                Edit
+                            </button>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">About Me</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/user/my-beeph/save-about-me?email=<%= user.email %>&pass=<%= user.password %>" method="POST" class="was-validated">
+                                                <div class="mb-3">
+                                                    <label for="validationTextarea">Type Here</label>
+                                                    <textarea class="form-control" id="validationTextarea" 
+                                                    name="aboutMeInput"
+                                                    placeholder="e.g. I like parties and studies" required><%=user.aboutMe%></textarea>
+                                                    <div class="invalid-feedback">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </button>
+                    </div>
+                </div>
+
+                
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>
+
+</html>
