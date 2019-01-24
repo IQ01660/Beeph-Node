@@ -34,4 +34,10 @@
 .clickable {
     width:10%;
     margin-top:1em;
+    margin-bottom:1em;
+}
+@media only screen and (max-width: 750px) {
+    .clickable {
+        width:100%;
+    }
 }

@@ -9,6 +9,7 @@ class User {
         this.surname = surname;
         this._id = id;
         this.aboutMe = '';
+        this.relationshipStatus = 'Not Specified';
     }
     
     save() {
@@ -25,6 +26,11 @@ class User {
     updateAboutMe(_aboutMe) {
         const db = getDb();
         return db.collection('users').updateOne({email: this.email}, {$set : {aboutMe: _aboutMe}});
+    }
+
+    updateRelStatus(_status) {
+        const db = getDb();
+        return db.collection('users').updateOne({email: this.email}, {$set : {relationshipStatus: _status}});
     }
 
     static findByEmail(_email) {

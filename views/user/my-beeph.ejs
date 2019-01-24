@@ -42,6 +42,7 @@
 
                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                     <div class="list-group mainInfo">
+                        <!-- ABOUT ME -->
                         <button type="button" class="list-group-item list-group-item-action active">About Me</button>
                         <button type="button" class="list-group-item list-group-item-action"><%=user.aboutMe%>
                             <!-- Button trigger modal -->
@@ -81,6 +82,54 @@
                             </div>
                         
                         </button>
+                        <!-- END OF ABOUT ME PART -->
+
+                        <!-- THE RELATIONSHIP STATUS -->
+                        
+                        <button type="button" class="list-group-item list-group-item-action active">Relationship Status</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=user.relationshipStatus%>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-secondary clickable" data-toggle="modal" data-target="#relationshipModal">
+                                Edit
+                            </button>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="relationshipModal" tabindex="-1" role="dialog" aria-labelledby="relationshipModalTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="relationshipModalTitle">Relationship Status</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/user/my-beeph/save-rel-status?email=<%= user.email %>&pass=<%= user.password %>" method="POST" class="was-validated">
+                                                <div class="form-group col-md-8">
+                                                    <label for="inputState">State</label>
+                                                    <select id="inputState" class="form-control" name="relationshipStatusInput" style="padding-right:1em">
+                                                        <option selected>Not Specified</option>
+                                                        <option>Single</option>
+                                                        <option>In a Relationship</option>
+                                                        <option>It's Complicated</option>
+                                                        <option>Engaged</option>
+                                                        <option>Married</option>
+                                                        <option>Divorced</option>
+                                                        <option>In an Open Relationship</option>
+                                                    </select>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                        <!-- END OF RELATIONSHIP STATUS PART -->
                     </div>
                 </div>
 

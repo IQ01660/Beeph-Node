@@ -73,3 +73,26 @@ exports.postMyBeephAboutMe = (req, res, next) => {
         throw err;
     })
 }
+
+// /user/my-beeph/save-rel-status => POST
+exports.postMyBeephRelStatus = (req, res, next) => {
+    const updatedStatus = req.body.relationshipStatusInput;
+    const email = req.query.email;
+    const password = req.query.pass;
+    return User.findByEmail(email)
+    .then(user => {
+        const updatedUser = new User(
+            user.email,
+            user.password,
+            user.name,
+            user.surname,
+            user.aboutMe,
+            user.relationshipStatus
+        );
+        res.redirect(`/user/my-beeph?email=${email}&pass=${password}`);
+        return updatedUser.updateRelStatus(updatedStatus);
+    })
+    .catch(err => {
+        throw err;
+    })
+}
