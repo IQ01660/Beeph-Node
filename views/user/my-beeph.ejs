@@ -21,7 +21,7 @@
             <div class="list-group profileOptions" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Main Info</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">About Me</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Courses</a>
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
             </div>
         </div>
@@ -29,6 +29,20 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                     <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">Profile Photo</button>
+                        <!-- THE PHOTO UPLOAD -->
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <div class="profilePhoto">
+                                <img src="/<%= user.imageUrl %>" alt="" class="img-fluid">
+                            </div>
+                            <form action="/user/my-beeph/upload-avatar?email=<%= user.email %>&pass=<%= user.password %>" method="POST" enctype="multipart/form-data">    
+                                <div class="custom-file">
+                                    <input type="file" class="bs-custom-file-input" id="image" name="imageInput">
+                                    <!-- <label class="custom-file-label" for="image">Choose file</label> -->
+                                </div>
+                                <button type="submit" class="btn btn-primary clickable">Save</button>
+                            </form>
+                        </button>
                         <button type="button" class="list-group-item list-group-item-action active">Name</button>
                         <button type="button" class="list-group-item list-group-item-action"><%=user.name%></button>
                         <button type="button" class="list-group-item list-group-item-action active">Surname</button>
@@ -133,8 +147,82 @@
                     </div>
                 </div>
 
+                <!-- COURSES -->
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                    <!-- THE ADD COURSE BUTTON -->
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-secondary clickable" data-toggle="modal" data-target="#coursesModal">
+                        Add Course
+                    </button>
                 
-                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="coursesModal" tabindex="-1" role="dialog" aria-labelledby="coursesModalTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="coursesModalTitle">Relationship Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/user/my-beeph/add-course?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
+                                        <!-- courseNameInput -->
+                                        <div class="form-group">
+                                            <label for="courseNameInput">Course Name</label>
+                                            <input type="text" class="form-control" id="courseNameInput" name="courseNameInput" aria-describedby="emailHelp" placeholder="e.g. PHYS 123">
+                                            <small id="emailHelp" class="form-text text-muted">Enter The Course Code (not full name)</small>
+                                        </div>
+                                        <!-- semesterInput -->
+                                        <div class="form-group">
+                                            <label for="semesterInput">Semester</label>
+                                            <select id="semesterInput" class="form-control" name="semesterInput" style="padding-right:1em">
+                                                <option selected>Fall</option>
+                                                <option>Spring</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="yearInput">Year</label>
+                                            <input type="number" class="form-control" id="yearInput" name="yearInput" placeholder="e.g. 2019">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- THE LIST -->
+                    <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">Courses</button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- PUT FOR LOOP HERE -->
+                                        <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </button>
+                    </div>
+
+                </div>
+
+
                 <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
             </div>
         </div>

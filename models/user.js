@@ -2,14 +2,15 @@ const mongodb = require('mongodb');
 const getDb = require('./../util/database').getDb;
 
 class User {
-    constructor(email, password, name, surname, id) {
+    constructor(email, password, name, surname) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this._id = id;
         this.aboutMe = '';
         this.relationshipStatus = 'Not Specified';
+        this.courses = [];
+        this.imageUrl = '/img/user.png';
     }
     
     save() {
@@ -31,6 +32,15 @@ class User {
     updateRelStatus(_status) {
         const db = getDb();
         return db.collection('users').updateOne({email: this.email}, {$set : {relationshipStatus: _status}});
+    }
+
+    updateProfileImg(_imgUrl) {
+        const db = getDb();
+        return db.collection('users').updateOne({email: this.email}, {$set : {imageUrl: _imgUrl}});
+    }
+
+    addCourse() {
+        
     }
 
     static findByEmail(_email) {

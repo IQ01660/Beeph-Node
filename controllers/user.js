@@ -59,6 +59,7 @@ exports.postMyBeephAboutMe = (req, res, next) => {
     const password = req.query.pass;
     return User.findByEmail(email)
     .then(user => {
+        console.log(user);
         const updatedUser = new User(
             user.email,
             user.password,
@@ -85,14 +86,31 @@ exports.postMyBeephRelStatus = (req, res, next) => {
             user.email,
             user.password,
             user.name,
-            user.surname,
-            user.aboutMe,
-            user.relationshipStatus
+            user.surname
         );
         res.redirect(`/user/my-beeph?email=${email}&pass=${password}`);
         return updatedUser.updateRelStatus(updatedStatus);
     })
     .catch(err => {
         throw err;
+    })
+}
+
+// /user/my-beeph/upload-avatar
+exports.postUploadAvatar = (req, res, next) => {
+    const image = req.file;
+    const imagePath = image.path;
+    const email = req.query.email;
+    const password = req.query.pass;
+    return User.findByEmail(email)
+    .then(user => {
+        const updatedUser = new User(
+            user.email,
+            user.password,
+            user.name,
+            user.surname
+        );
+        res.redirect(`/user/my-beeph?email=${email}&pass=${password}`);
+        updatedUser.updateProfileImg(imagePath);
     })
 }

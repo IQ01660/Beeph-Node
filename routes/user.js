@@ -18,4 +18,7 @@ router.post('/my-beeph/save-about-me', userControllers.postMyBeephAboutMe);
 // /user/my-beeph/save-rel-status => POST
 router.post('/my-beeph/save-rel-status', userControllers.postMyBeephRelStatus);
 
+// /user/my-beeph/upload-avatar
+router.post('/my-beeph/upload-avatar', userControllers.postUploadAvatar);
+
 module.exports = router;
