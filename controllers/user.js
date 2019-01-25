@@ -96,6 +96,23 @@ exports.postMyBeephRelStatus = (req, res, next) => {
     })
 }
 
+// /user/my-beeph/add-course
+exports.postAddMyCourses = (req, res, next) => {
+    const email = req.query.email;
+    const password = req.query.pass;
+    const courseName = req.body.courseNameInput;
+    const semester = req.body.semesterInput;
+    const year = req.body.yearInput;
+    
+    return User.addCourse(email, courseName, semester, year)
+    .then(result => {
+        res.redirect(`/user/my-beeph?email=${email}&pass=${password}`);
+    })
+    .catch(err => {
+        throw err;
+    });
+}
+
 // /user/my-beeph/upload-avatar
 exports.postUploadAvatar = (req, res, next) => {
     const image = req.file;

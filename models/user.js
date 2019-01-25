@@ -39,8 +39,22 @@ class User {
         return db.collection('users').updateOne({email: this.email}, {$set : {imageUrl: _imgUrl}});
     }
 
-    addCourse() {
-        
+    static addCourse(_email, _courseName, _semester, _year) {
+        const db = getDb();
+        const newCourse = {
+            courseName: _courseName,
+            semester: _semester,
+            year: _year
+        };
+        return User.findByEmail(_email)
+        .then(user => {
+            const allCourses = user.courses;
+            allCourses.push(newCourse);
+            return db.collection('users').updateOne({email: _email}, {$set: {courses: allCourses}})
+        })
+        .catch(err => {
+            throw err;
+        });
     }
 
     static findByEmail(_email) {

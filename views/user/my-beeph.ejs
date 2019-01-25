@@ -209,12 +209,14 @@
                                     </thead>
                                     <tbody>
                                         <!-- PUT FOR LOOP HERE -->
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
+                                        <% for(let i = user.courses.length - 1; i >= 0; i--) { %>
+                                            <tr>
+                                                <th scope="row"><%= (user.courses.length - i) %></th>
+                                                <td><%= user.courses[i].courseName %></td>
+                                                <td><%= user.courses[i].semester %></td>
+                                                <td><%= user.courses[i].year %></td>
+                                            </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
                         </button>
