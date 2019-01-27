@@ -1,0 +1,28 @@
+body {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.jumbotron{
+    font-family: 'Merriweather Sans', sans-serif;
+    background-image: url("/img/jumbotronProfile.png");
+    background-repeat: repeat;
+    background-attachment:fixed; 
+}
+.jumbotron h1 {
+    background:linear-gradient(to right, rgba(162, 0, 255, 0.8), rgba(0, 119, 255, 0.8));
+    color: white;
+    padding:0.5em 0.5em;
+    text-align: center;
+}
+
+.participantsBtn {
+    width:100%;
+    background:linear-gradient(to right, rgb(162, 0, 255), rgb(8, 172, 212));
+    color:white;
+    transition: all 1s ease-in-out;
+}
+.participantsBtn:hover {
+    width: 30%;
+    margin: auto;
+    color:white;
+    background: rgb(0, 89, 255);
+}

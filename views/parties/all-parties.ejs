@@ -1,0 +1,129 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/all-parties.css">
+</head>
+<body>
+
+    <!-- INCLUDING THE NAVBAR -->
+    <%- include('../includes/nav.ejs', {user: user}) %>
+
+
+    <!-- MAIN PART -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Parties</h1>
+        </div>
+    </div>
+
+    <!-- ADDING A PARTY -->
+    <!-- Button trigger modal -->
+    <button type="button" style="margin: 1em;" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+        Organize a Party
+    </button>
+      
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Party Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/parties/add-party?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
+                        <!-- partyNameInput -->
+                        <div class="form-group">
+                            <label for="partyNameInput">Party Name</label>
+                            <input type="text" class="form-control" id="partyNameInput" name="partyNameInput" placeholder="e.g. Basketball Team Party">
+                        </div>
+                        <!-- semesterInput -->
+                        <div class="form-group">
+                            <label for="placeInput">Place</label>
+                            <input type="text" class="form-control" id="placeInput" name="placeInput" placeholder="e.g. Hitchcock">
+                        </div>
+                        <div class="form-group">
+                            <label for="timeInput">Time</label>
+                            <input type="text" class="form-control" id="timeInput" name="timeInput" placeholder="e.g. 10:30 PM">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateInput">Date</label>
+                            <input type="text" class="form-control" id="dateInput" name="dateInput" placeholder="MM/DD/YYYY format">
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionInput">Description</label>
+                            <input type="text" class="form-control" id="descriptionInput" name="descriptionInput" placeholder="e.g. What kind of drinks, music, or games">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE LIST OF PARTIES -->
+    <div class="list-group">
+        <% for(let i = parties.length - 1; i >= 0; i--) { %>
+            <a href="" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%=parties[i].name%></h5>
+                    <small>Date & Time: <%=parties[i].date%>, at <%=parties[i].time%></small>
+                    <small>Number of attendants: <%=parties[i].participants%></small>
+                </div>
+                <p class="mb-1"><%=parties[i].desctiption%></p>
+                <small>Location: <%=parties[i].place%></small>
+                <br>
+                <small>Organized by: <%=parties[i].organizer.name%> <%=parties[i].organizer.surname%></small>
+                <br>
+                <form style="margin-top: 1em; display:inline-block" action="/parties/add-attendant?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
+                    <input type="hidden" name="partyIdInput" value="<%=parties[i]._id%>">
+                    <button type="submit" class="btn btn-success">Participate</button>
+                </form>
+                
+                <% if(user.password == parties[i].organizer.password) { %>
+                    <form style="margin-top: 1em; display:inline-block" action="/parties/delete-party?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
+                        <input type="hidden" name="partyIdInput" value="<%=parties[i]._id%>">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                <% } %> 
+            </a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn participantsBtn" data-toggle="modal" data-target="#participantsList<%=i%>" style="margin-bottom:2em;">
+                All Participants
+            </button>
+      
+            <!-- Modal -->
+            <div class="modal fade" id="participantsList<%=i%>" tabindex="-1" role="dialog" aria-labelledby="participantsListTitle<%=i%>" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="participantsListTitle<%=i%>">All Participants</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="text-align:center;">
+                            <% for (let j = 0; j < parties[i].attendants.length; j++) { %>
+                                <p><%=parties[i].attendants[j].name%> <%=parties[i].attendants[j].surname%></p>
+                            <% } %>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    
+<!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+<%- include('../includes/end.ejs') %>
+</body>
+
+</html>

@@ -22,7 +22,6 @@
                 <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Main Info</a>
                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">About Me</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Courses</a>
-                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
             </div>
         </div>
         <div class="col-8">
@@ -201,7 +200,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">Delete</th>
                                         <th scope="col">Course</th>
                                         <th scope="col">Semester</th>
                                         <th scope="col">Year</th>
@@ -211,7 +210,7 @@
                                         <!-- PUT FOR LOOP HERE -->
                                         <% for(let i = user.courses.length - 1; i >= 0; i--) { %>
                                             <tr>
-                                                <th scope="row"><%= (user.courses.length - i) %></th>
+                                                <th scope="row"><i class="fas fa-trash-alt"></i></th>
                                                 <td><%= user.courses[i].courseName %></td>
                                                 <td><%= user.courses[i].semester %></td>
                                                 <td><%= user.courses[i].year %></td>
@@ -223,9 +222,6 @@
                     </div>
 
                 </div>
-
-
-                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
             </div>
         </div>
     </div>
