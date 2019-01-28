@@ -32,7 +32,7 @@
                         <!-- THE PHOTO UPLOAD -->
                         <button type="button" class="list-group-item list-group-item-action">
                             <div class="profilePhoto">
-                                <img src="/<%= user.imageUrl %>" alt="" class="img-fluid">
+                                <img src="/<%= user.imageUrl %>" alt="" class="img-fluid" style="<%= user.imageUrl=='img/user.png' ? 'width:100%;' : '' %>">
                             </div>
                             <form action="/user/my-beeph/upload-avatar?email=<%= user.email %>&pass=<%= user.password %>" method="POST" enctype="multipart/form-data">    
                                 <div class="custom-file">

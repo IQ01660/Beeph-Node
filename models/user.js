@@ -10,7 +10,7 @@ class User {
         this.aboutMe = '';
         this.relationshipStatus = 'Not Specified';
         this.courses = [];
-        this.imageUrl = '/img/user.png';
+        this.imageUrl = 'img/user.png';
     }
     
     save() {
