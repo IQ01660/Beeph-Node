@@ -1,0 +1,100 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/my-beeph.css">
+</head>
+<body>
+    <!-- INCLUDING THE NAVBAR -->
+    <%- include('../includes/nav.ejs', {user: user}) %>
+
+
+    <!-- MAIN PART -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Beeph</h1>
+        </div>
+    </div>
+    <!-- THE OPTIONS -->
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group profileOptions" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Main Info</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">About Me</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Courses</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">Profile Photo</button>
+                        <!-- THE PHOTO UPLOAD -->
+                        <button type="button" class="list-group-item list-group-item-action">
+                            <div class="profilePhoto">
+                                <img src="/<%= alienUser.imageUrl %>" alt="" class="img-fluid">
+                            </div>
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action active">Name</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=alienUser.name%></button>
+                        <button type="button" class="list-group-item list-group-item-action active">Surname</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=alienUser.surname%></button>
+                        <button type="button" class="list-group-item list-group-item-action active" disabled>Email</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=alienUser.email%></button>
+                    </div>
+                </div>
+
+
+
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <div class="list-group mainInfo">
+                        <!-- ABOUT ME -->
+                        <button type="button" class="list-group-item list-group-item-action active">About Me</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=alienUser.aboutMe%></button>
+                        <!-- END OF ABOUT ME PART -->
+
+                        <!-- THE RELATIONSHIP STATUS -->
+                        
+                        <button type="button" class="list-group-item list-group-item-action active">Relationship Status</button>
+                        <button type="button" class="list-group-item list-group-item-action"><%=alienUser.relationshipStatus%></button>
+                        <!-- END OF RELATIONSHIP STATUS PART -->
+                    </div>
+                </div>
+
+                <!-- COURSES -->
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                    <!-- THE LIST -->
+                    <div class="list-group mainInfo">
+                        <button type="button" class="list-group-item list-group-item-action active">Courses</button>
+                        <button type="button" class="list-group-item list-group-item-action">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- PUT FOR LOOP HERE -->
+                                        <% for(let i = alienUser.courses.length - 1; i >= 0; i--) { %>
+                                            <tr>
+                                                <td><%= alienUser.courses[i].courseName %></td>
+                                                <td><%= alienUser.courses[i].semester %></td>
+                                                <td><%= alienUser.courses[i].year %></td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>
+
+</html>

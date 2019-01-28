@@ -1,5 +1,6 @@
 body {
     font-family: 'Merriweather Sans', sans-serif;
+    background:linear-gradient(to right, rgba(162, 0, 255, 0.8), rgba(0, 119, 255, 0.8))
 }
 .jumbotron{
     font-family: 'Merriweather Sans', sans-serif;
@@ -14,15 +15,20 @@ body {
     text-align: center;
 }
 
-.participantsBtn {
-    width:100%;
-    background:linear-gradient(to right, rgb(162, 0, 255), rgb(8, 172, 212));
-    color:white;
-    transition: all 0.5s ease-in-out;
+.searchDescr {
+    background:linear-gradient(to right, rgba(162, 0, 255, 0.8), rgba(0, 119, 255, 0.8)) !important;
+    color:white !important;
 }
-.participantsBtn:hover {
-    width: 30%;
-    margin: auto;
-    color:white;
-    background: rgb(0, 89, 255);
+
+.searchBtn {
+    width:15%;
+}
+
+.searchedItem {
+    font-size:2em;
+    border-radius: 5%;
+}
+
+.searchedImg {
+    width:5%;
 }

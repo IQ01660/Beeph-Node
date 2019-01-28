@@ -86,7 +86,7 @@
                     <button type="submit" class="btn btn-success">Participate</button>
                 </form>
                 
-                <% if(user.password == parties[i].organizer.password) { %>
+                <% if(user.password == parties[i].organizer.password && user.email == parties[i].organizer.email) { %>
                     <form style="margin-top: 1em; display:inline-block" action="/parties/delete-party?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
                         <input type="hidden" name="partyIdInput" value="<%=parties[i]._id%>">
                         <button type="submit" class="btn btn-danger">Delete</button>

@@ -52,6 +52,37 @@ exports.postMyBeeph = (req, res, next) => {
     });
 }
 
+// /user/alien-beeph => GET
+exports.getAlienBeeph = (req, res, next) => {
+    const email = req.query.email;
+    const password = req.query.pass;
+    const alienEmail = req.query.alienemail;
+
+    return User.hasAccess(email, password)
+    .then(access => {
+        if (access) {
+            return User.findByEmail(email)
+            .then(homeUser => {
+                return User.findByEmail(alienEmail)
+                .then(alienUser => {
+                    res.render('user/alien-beeph.ejs', {
+                        user: homeUser,
+                        alienUser: alienUser,
+                        pageTitle: `Welcome ${homeUser.name}`
+                    })
+                })
+            })
+            .catch(err => {
+                throw err;
+            });
+            
+        }
+        else {
+            res.redirect('/doesnotexist');
+        }
+    });
+}
+
 // /user/my-beeph/save-about-me => POST
 exports.postMyBeephAboutMe = (req, res, next) => {
     const updatedAbout = req.body.aboutMeInput;
@@ -111,6 +142,21 @@ exports.postAddMyCourses = (req, res, next) => {
     .catch(err => {
         throw err;
     });
+}
+
+exports.postDeleteMyCourse = (req, res, next) => {
+    const email = req.query.email;
+    const password = req.query.pass;
+    const courseName = req.body.courseNameInput;
+
+    return User.findByEmail(email)
+    .then(user => {
+        res.redirect(`/user/my-beeph?email=${email}&pass=${password}`);
+        return User.deleteCourse(user, courseName);
+    })
+    .catch(err => {
+        throw err;
+    })
 }
 
 // /user/my-beeph/upload-avatar

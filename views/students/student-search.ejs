@@ -1,0 +1,50 @@
+<!-- INCLUDING THE DEFAULT PART OF HEAD -->
+<%- include('../includes/head.ejs') %>
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/student-search.css">
+</head>
+<body>
+    <!-- INCLUDING THE NAVBAR -->
+    <%- include('../includes/nav.ejs', {user: user}) %>
+
+    <!-- MAIN PART -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Students</h1>
+        </div>
+    </div>
+    <!-- SEARCH AREA -->
+    <form action="/students/student-search?email=<%= user.email %>&pass=<%= user.password %>" method="POST" style="margin-bottom:3em;">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text searchDescr">First and last name</span>
+            </div>
+            <input type="text" aria-label="First name" class="form-control" name="nameInput">
+            <input type="text" aria-label="Last name" class="form-control" name="surnameInput">
+            <button type="submit" class="btn btn-success searchBtn">Search</button>
+        </div>
+    </form>
+
+    <!-- RESULTS AREA -->
+    <div class="list-group">
+        <% for(let i = 0; i < searchedUsers.length; i++) { %>
+            <a href="/user/alien-beeph?email=<%= user.email %>&pass=<%= user.password %>&alienemail=<%=searchedUsers[i].email%>" class="list-group-item list-group-item-action searchedItem">
+                <img src="/<%= searchedUsers[i].imageUrl %>" alt="user's image" class="img-thumbnail searchedImg">
+                <%= searchedUsers[i].name %> <%= searchedUsers[i].surname %>
+            </a>
+        <% } %>
+    </div>
+    <% if(method == 'POST' && searchedUsers.length == 0) { %>
+        <a href="#" class="list-group-item list-group-item-action searchedItem" style="text-align: center;">
+            No Results
+        </a>
+    <% } %>
+
+
+
+    <!-- INCLUDING ALL THE DEFAULT SCRIPTS -->
+    <%- include('../includes/end.ejs') %>
+</body>
+
+</html>

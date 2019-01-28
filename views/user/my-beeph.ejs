@@ -8,7 +8,7 @@
     <!-- INCLUDING THE NAVBAR -->
     <%- include('../includes/nav.ejs', {user: user}) %>
 
-
+    <h2 id="screenWarning">Please Rotate Your Device to the Landscape Mode</h2>
     <!-- MAIN PART -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -210,7 +210,12 @@
                                         <!-- PUT FOR LOOP HERE -->
                                         <% for(let i = user.courses.length - 1; i >= 0; i--) { %>
                                             <tr>
-                                                <th scope="row"><i class="fas fa-trash-alt"></i></th>
+                                                <td scope="row">
+                                                    <form action="/user/my-beeph/delete-course?email=<%= user.email %>&pass=<%= user.password %>" method="POST">
+                                                        <input type="hidden" value="<%=user.courses[i].courseName%>" name="courseNameInput">
+                                                        <button class="btn" type="submit"><i class="fas fa-trash-alt deleteCourse"></i></button>
+                                                    </form>
+                                                </td>
                                                 <td><%= user.courses[i].courseName %></td>
                                                 <td><%= user.courses[i].semester %></td>
                                                 <td><%= user.courses[i].year %></td>

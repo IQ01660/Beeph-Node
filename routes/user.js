@@ -12,6 +12,9 @@ router.get('/my-beeph', userControllers.getMyBeeph);
 // /user/my-beeph => POST
 router.post('/my-beeph', userControllers.postMyBeeph);
 
+// /user/alien-beeph => GET
+router.get('/alien-beeph', userControllers.getAlienBeeph);
+
 // /user/my-beeph/save-about-me => POST
 router.post('/my-beeph/save-about-me', userControllers.postMyBeephAboutMe);
 
@@ -23,5 +26,8 @@ router.post('/my-beeph/upload-avatar', userControllers.postUploadAvatar);
 
 // /user/my-beeph/add-course => POST
 router.post('/my-beeph/add-course', userControllers.postAddMyCourses);
+
+// /user/my-beeph/delete-course => POST
+router.post('/my-beeph/delete-course', userControllers.postDeleteMyCourse);
 
 module.exports = router;

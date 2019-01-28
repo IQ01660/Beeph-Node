@@ -92,6 +92,17 @@ class User {
             throw err;
         });
     }
+
+    static deleteCourse(user, _courseName) {
+        const db = getDb();
+
+        for (let i = 0; i < user.courses.length; i++) {
+            if(user.courses[i].courseName == _courseName) {
+                user.courses.splice(i, 1);
+            }
+        }
+        return db.collection('users').updateOne({_id: new mongodb.ObjectId(user._id)}, {$set: {courses: user.courses}});
+    }
 }
 
 module.exports = User;

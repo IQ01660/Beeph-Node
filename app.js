@@ -13,6 +13,7 @@ const databaseMethods = require('./util/database');
 const welcomeRoutes = require('./routes/welcome');
 const userRoutes = require('./routes/user');
 const partiesRoutes = require('./routes/parties');
+const studentsRoutes = require('./routes/students');
 
 //creating the app
 const app = express();
@@ -54,6 +55,7 @@ app.set('views', 'views');
 //running all imported routes
 app.use('/user', userRoutes);
 app.use('/parties', partiesRoutes);
+app.use('/students', studentsRoutes);
 app.use(welcomeRoutes);
 
 

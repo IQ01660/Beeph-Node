@@ -56,7 +56,8 @@ exports.postRegister = (req, res, next) => {
         return result;
     })
     .then(result => {
-        if((email.split('@')[1] != 'amherst.edu') || (emailDoesExist == true)) {
+        //(email.split('@')[1] != 'amherst.edu') ||
+        if((emailDoesExist == true)) {
             req.method = 'GET';
             res.render('welcome/register.ejs', {
                 pageTitle: "Sign Up",
